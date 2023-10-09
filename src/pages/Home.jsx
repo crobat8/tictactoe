@@ -6,17 +6,13 @@ import FullGame from '../componets/FullGame';
 const Home = () =>{ 
   
   const{userInfo} =useContext(UserContext);
-  const[mode,setMode]=useState("Two")
+  const[mode,setMode]=useState("Online")
   const[game,setGame]=useState(<FullGame/>)
   const handleGameMode = async (e,x) =>{
 
     setMode(x)
     
   }
-
-  // useEffect(()=>{
-  //   setGame(<FullGame/>)
-  // },[game,setGame])
 
   if(!userInfo){
     return(

@@ -6,11 +6,11 @@ import {
   AuthContext 
 } from "../context/AuthContext";
 
-export const GameContext = createContext();
+export const SearchingContext = createContext();
 
-export const GameContextProvider = ({ children }) => {
+export const SearchingContextProvider = ({ children }) => {
   const { currentUser } = useContext(AuthContext);
-  const [SearchingInfo,setSearchingInfo]=useState(null)
+  const [GameInfo,setGameInfo]=useState(null)
   const [loading,setLoading]=useState(true)
   
   useEffect(() => {
@@ -20,7 +20,7 @@ export const GameContextProvider = ({ children }) => {
 
     const userRef =query(collection(db,"games"),where("players","array-contains",currentUser.uid),) 
     const unsub = onSnapshot(userRef,(snapshot)=>{
-      setSearchingInfo(snapshot.docs.map(doc=>doc.data()))
+      setGameInfo(snapshot.docs.map(doc=>doc.data()))
     })
     
     return () => {
@@ -30,8 +30,8 @@ export const GameContextProvider = ({ children }) => {
   }, [currentUser]);
 
   return (
-    <GameContext.Provider value={{ SearchingInfo }}>
+    <SearchingContext.Provider value={{ GameInfo }}>
       {children}
-    </GameContext.Provider>
+    </SearchingContext.Provider>
   );
 };
