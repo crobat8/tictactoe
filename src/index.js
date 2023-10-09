@@ -6,6 +6,7 @@ import { AuthContextProvider } from './context/AuthContext';
 import { ChatContextProvider } from './context/ChatContext';
 import { UserContextProvider } from './context/UserContext';
 import { GameContextProvider } from './context/GameContext';
+import { SearchingContextProvider } from './context/SearchingContext';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -13,11 +14,12 @@ root.render(
     <ChatContextProvider>
       <UserContextProvider>
         <GameContextProvider>
-          <React.StrictMode>
-            <App />
-          </React.StrictMode>
+          <SearchingContextProvider>
+            <React.StrictMode>
+              <App />
+            </React.StrictMode>
+          </SearchingContextProvider>
         </GameContextProvider>
-
       </UserContextProvider>
     </ChatContextProvider>
   </AuthContextProvider>

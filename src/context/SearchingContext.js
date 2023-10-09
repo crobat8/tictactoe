@@ -18,7 +18,7 @@ export const SearchingContextProvider = ({ children }) => {
       return
     }
 
-    const userRef =query(collection(db,"games"),where("players","array-contains",currentUser.uid),) 
+    const userRef =query(collection(db,"search"),where("players","array-contains",currentUser.uid),) 
     const unsub = onSnapshot(userRef,(snapshot)=>{
       setGameInfo(snapshot.docs.map(doc=>doc.data()))
     })
