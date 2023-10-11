@@ -59,7 +59,7 @@ const FullGame = ()=>{
         
          
         return(
-          <MiniGame val={i} 
+          <MiniGame big={i} 
                     piece={turnPiece} 
                     action={action} 
                     key={i}

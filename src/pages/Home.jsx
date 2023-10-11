@@ -5,7 +5,7 @@ import FullGame from '../componets/FullGame';
 
 import { auth, db, storage } from "../firebase";
 
-import { collection, doc, query, setDoc, where, getDocs} from "firebase/firestore";
+import { collection, doc, query, setDoc, where, getDocs, deleteDoc} from "firebase/firestore";
 import { SearchingContext } from '../context/SearchingContext';
 
 const Home = () =>{ 
@@ -27,7 +27,7 @@ const Home = () =>{
           uid:userInfo[0].uid,
           mmr:userInfo[0].mmr
         }).then(() => {
-          console.log("Successful")}
+          console.log("Successfully built search")}
         );
       }else if(SearchInfo.length == 1 && SearchInfo[0].uid == userInfo[0].uid){
         //im the only game found
@@ -43,16 +43,19 @@ const Home = () =>{
         var players = [SearchInfo[x].uid,userInfo[0].uid]
         var gameName;
         if(SearchInfo[x].uid<userInfo[0].uid){
-          gameName = SearchInfo[x].uid+userInfo[0].uid;
+          gameName = SearchInfo[x].uid+"_"+userInfo[0].uid;
         }else{
-          gameName = userInfo[0].uid+SearchInfo[x].uid;
+          gameName = userInfo[0].uid+"_"+SearchInfo[x].uid;
         }
 
+        await deleteDoc(doc(db,"searching",SearchInfo[x].uid))
+        
         await setDoc(doc(db,"games",gameName), {
           players
         }).then(() => {
           console.log("Successful built game")}
         );
+        
       }
       
     }

@@ -1,21 +1,24 @@
 import React, { useContext, useState,memo } from 'react';
+import { doc, updateDoc } from "firebase/firestore";
+import { auth, db, storage } from "../firebase";
 
 const MiniGame = (props)=>{
   const [gameState,setGameState]=useState(["","","",
                                            "","","",
                                            "","",""])
-  function handlePlay(sector){
-    if(gameState[sector] == ""&&props.playable){
-      
-      gameState[sector] = props.piece;
-      setGameState([...gameState]);
-      
 
-      var temp = checkWinner();
-      props.action(props.val,temp,sector);
-      
-      
-    }
+  const handlePlay = async(small)=>{
+
+    const gameRef = doc(db,"games","8LZs6CCr40WRVZXwqenabFvWruD2_t9KT16jnS1NeTbaWsWM5f7PVYkp1")
+
+    await updateDoc(gameRef, {
+      recentM: props.big,
+      recentS: small,
+    });
+
+
+    console.log("small",small)
+    console.log("big",props.big)
   }
   function checkWinner(){
     
