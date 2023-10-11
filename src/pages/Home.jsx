@@ -29,15 +29,29 @@ const Home = () =>{
         }).then(() => {
           console.log("Successful")}
         );
+      }else if(SearchInfo.length == 1 && SearchInfo[0].uid == userInfo[0].uid){
+        //im the only game found
+        console.log("just me")
       }else{
         //found a game
         console.log("found")
         console.log(SearchInfo)
-        await setDoc(doc(db,"games",userInfo[0].uid), {
-          uid:userInfo[0].uid,
-          mmr:userInfo[0].mmr
+        var x = 0;
+        if(SearchInfo[x].uid == userInfo[0].uid){
+          x++
+        }
+        var players = [SearchInfo[x].uid,userInfo[0].uid]
+        var gameName;
+        if(SearchInfo[x].uid<userInfo[0].uid){
+          gameName = SearchInfo[x].uid+userInfo[0].uid;
+        }else{
+          gameName = userInfo[0].uid+SearchInfo[x].uid;
+        }
+
+        await setDoc(doc(db,"games",gameName), {
+          players
         }).then(() => {
-          console.log("Successful")}
+          console.log("Successful built game")}
         );
       }
       
