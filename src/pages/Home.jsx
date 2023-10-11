@@ -5,22 +5,42 @@ import FullGame from '../componets/FullGame';
 
 import { auth, db, storage } from "../firebase";
 
-import { doc, setDoc } from "firebase/firestore";
+import { collection, doc, query, setDoc, where, getDocs} from "firebase/firestore";
+import { SearchingContext } from '../context/SearchingContext';
 
 const Home = () =>{ 
   
   const{userInfo} =useContext(UserContext);
+  const{SearchInfo} = useContext(SearchingContext)
   const[mode,setMode]=useState("Online")
-  const[game,setGame]=useState(<FullGame/>)
+  const[foundGame,setFoundGame] = useState(null)
   const handleGameMode = async (e,x) =>{
 
     setMode(x)
     if(x == 'Online'){
-      await setDoc(doc(db,"messages","this_test"), {
-        original:"test"
-      }).then(() => {
-        console.log("Successful")}
-      );
+      console.log(SearchInfo.length)
+      if(SearchInfo.length == 0){
+        //no possible game
+        console.log("null")
+        console.log(SearchInfo)
+        await setDoc(doc(db,"searching",userInfo[0].uid), {
+          uid:userInfo[0].uid,
+          mmr:userInfo[0].mmr
+        }).then(() => {
+          console.log("Successful")}
+        );
+      }else{
+        //found a game
+        console.log("found")
+        console.log(SearchInfo)
+        await setDoc(doc(db,"games",userInfo[0].uid), {
+          uid:userInfo[0].uid,
+          mmr:userInfo[0].mmr
+        }).then(() => {
+          console.log("Successful")}
+        );
+      }
+      
     }
     
   }
@@ -48,7 +68,7 @@ const Home = () =>{
         </div>
         <div>
           <h1>
-            Super TicTacToe
+            Super TicTacToe 
           </h1>
         </div>
         <div>
@@ -75,8 +95,8 @@ const Home = () =>{
 
             </div>
           </div>
-          {mode}
-          {game}
+          {/* {mode} */}
+          <FullGame/>
           
         </div>
         <div className='placeHolder'></div>

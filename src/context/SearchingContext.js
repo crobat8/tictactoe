@@ -2,35 +2,37 @@ import { createContext, useEffect, useState,useContext } from "react";
 import { auth, db } from "../firebase";
 import { collection, onSnapshot, query, where } from "firebase/firestore";
 
-import { 
-  AuthContext 
-} from "../context/AuthContext";
+import { AuthContext } from "../context/AuthContext";
+import { UserContext } from '../context/UserContext';
 
 export const SearchingContext = createContext();
 
 export const SearchingContextProvider = ({ children }) => {
   const { currentUser } = useContext(AuthContext);
-  const [GameInfo,setGameInfo]=useState(null)
+  const{userInfo} =useContext(UserContext);
+  const [SearchInfo,setSearchInfo]=useState(null)
   const [loading,setLoading]=useState(true)
   
   useEffect(() => {
     if(!currentUser){
       return
     }
-
-    const userRef =query(collection(db,"search"),where("players","array-contains",currentUser.uid),) 
+    if(!userInfo){
+      return
+    }
+    const userRef =query(collection(db,"searching"),where("mmr","<=",userInfo[0].mmr+100),where("mmr",">=",userInfo[0].mmr-100)) 
     const unsub = onSnapshot(userRef,(snapshot)=>{
-      setGameInfo(snapshot.docs.map(doc=>doc.data()))
+      setSearchInfo(snapshot.docs.map(doc=>doc.data()))
     })
     
     return () => {
       unsub();
     };
 
-  }, [currentUser]);
+  }, [currentUser,userInfo]);
 
   return (
-    <SearchingContext.Provider value={{ GameInfo }}>
+    <SearchingContext.Provider value={{ SearchInfo }}>
       {children}
     </SearchingContext.Provider>
   );
