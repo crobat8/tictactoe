@@ -1,8 +1,12 @@
 import React, { useContext, useState,useEffect,memo } from 'react';
-import { auth } from '../firebase'
 import {signOut} from "firebase/auth"
 import { UserContext } from '../context/UserContext';
 import FullGame from '../componets/FullGame';
+
+import { auth, db, storage } from "../firebase";
+
+import { doc, setDoc } from "firebase/firestore";
+
 const Home = () =>{ 
   
   const{userInfo} =useContext(UserContext);
@@ -11,6 +15,13 @@ const Home = () =>{
   const handleGameMode = async (e,x) =>{
 
     setMode(x)
+    if(x == 'Online'){
+      await setDoc(doc(db,"messages","this_test"), {
+        original:"test"
+      }).then(() => {
+        console.log("Successful")}
+      );
+    }
     
   }
 
@@ -48,15 +59,21 @@ const Home = () =>{
         <div className='placeHolder'></div>
         <div className='gameHolder'>
           <div className='resetHolder'>
-            <button onClick={(e)=>handleGameMode(e,"One")}>
+            {/* <button onClick={(e)=>handleGameMode(e,"One")}>
               new one player game
-            </button>
-            <button onClick={(e)=>handleGameMode(e,"two")}> 
+            </button> */}
+            {/* <button onClick={(e)=>handleGameMode(e,"two")}> 
               new two player game
-            </button>
+            </button> */}
+            <div>
+
+            </div>
             <button onClick={(e)=>handleGameMode(e,"Online")}>
               new online game
             </button>
+            <div>
+
+            </div>
           </div>
           {mode}
           {game}
