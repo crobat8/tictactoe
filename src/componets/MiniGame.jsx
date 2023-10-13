@@ -14,6 +14,7 @@ const MiniGame = (props)=>{
     await updateDoc(gameRef, {
       recentM: props.big,
       recentS: small,
+      function: "ready"
     });
 
 
