@@ -24,10 +24,37 @@ const MiniGame = (props)=>{
   return(
     <div className='miniGame'>
       {props.gameNum.map((e,i)=>{
+        let playable;
+        console.log(gameInfo[0].winnerM )
+        if(gameInfo[0].winnerM != ""){
+          playable = false;
+        }else if(gameInfo[0].mainGame[gameInfo[0].recentS] == "FULL"|| gameInfo[0].mainGame[gameInfo[0].recentS] == "X" ||gameInfo[0].mainGame[gameInfo[0].recentS] == "O"){
+          if(gameInfo[0].mainGame[props.big] == "FULL"|| gameInfo[0].mainGame[props.big] == "X" ||gameInfo[0].mainGame[props.big] == "O"){
+            playable = false;
+          }else{
+            playable = true;
+          }
+        }else if(gameInfo[0].recentS == props.big || gameInfo[0].recentS == 10 ){
+          playable = true;
+        }else{
+          playable = false;
+        }
         return(
-          <div className={gameInfo[0].function == "done"?"cellP":"cellD"} onClick={()=>handlePlay(i)} key={i}>
-            {e}
+          <div>
+            {
+              gameInfo[0].function == "done" && e == "" && playable
+              ?
+              <div className={"cellP"} onClick={()=>handlePlay(i)} key={i}>
+              {e}
+              </div>
+              :
+              <div className={"cellD"} key={i}>
+              {e}
+              </div>
+            }
           </div>
+          
+          
         )
       })}
     </div>
