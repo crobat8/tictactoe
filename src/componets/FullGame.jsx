@@ -1,24 +1,14 @@
 import React, { useContext, useState,memo } from 'react';
 import MiniGame from './MiniGame';
+import { GameContext } from '../context/GameContext';
 
 const FullGame = ()=>{
   const [gameState,setGameState]=useState(["NON","NON","NON",
                                            "NON","NON","NON",
                                            "NON","NON","NON"])
+  
   const [turnPiece,setTurnPiece]=useState("X")
   const [lastPlayed,setLastPlayed]=useState(10)
-  function action(playedArea,winner,sector){
-    
-    
-    handleWinner(playedArea,winner);
-    handleTurn();
-    if(gameState[sector]=='NON'){
-      setLastPlayed(sector)
-    }else{
-      setLastPlayed(10)
-    }
-    
-  }
 
   function handleTurn(){
     if(turnPiece == "X"){
@@ -61,7 +51,6 @@ const FullGame = ()=>{
         return(
           <MiniGame big={i} 
                     piece={turnPiece} 
-                    action={action} 
                     key={i}
                     playable={playable}
                     />

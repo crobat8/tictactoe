@@ -10,19 +10,19 @@ export const GameContext = createContext();
 
 export const GameContextProvider = ({ children }) => {
   const { currentUser } = useContext(AuthContext);
-  const [SearchingInfo,setSearchingInfo]=useState(null)
+  const [gameInfo,setGameInfo]=useState(null)
   const [loading,setLoading]=useState(true)
   
   useEffect(() => {
     if(!currentUser){
       return
     }
-
-    const userRef =query(collection(db,"games"),where("players","array-contains",currentUser.uid),) 
+    console.log(currentUser)
+    const userRef = query(collection(db,"games"),where("players","array-contains",currentUser.uid)) 
     const unsub = onSnapshot(userRef,(snapshot)=>{
-      setSearchingInfo(snapshot.docs.map(doc=>doc.data()))
+      setGameInfo(snapshot.docs.map(doc=>doc.data()))
+      
     })
-    
     return () => {
       unsub();
     };
@@ -30,7 +30,7 @@ export const GameContextProvider = ({ children }) => {
   }, [currentUser]);
 
   return (
-    <GameContext.Provider value={{ SearchingInfo }}>
+    <GameContext.Provider value={{ gameInfo }}>
       {children}
     </GameContext.Provider>
   );

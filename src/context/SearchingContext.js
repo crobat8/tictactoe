@@ -9,7 +9,7 @@ export const SearchingContext = createContext();
 
 export const SearchingContextProvider = ({ children }) => {
   const { currentUser } = useContext(AuthContext);
-  const{userInfo} =useContext(UserContext);
+  const {userInfo} =useContext(UserContext);
   const [SearchInfo,setSearchInfo]=useState(null)
   const [loading,setLoading]=useState(true)
   

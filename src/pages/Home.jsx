@@ -51,7 +51,8 @@ const Home = () =>{
         await deleteDoc(doc(db,"searching",SearchInfo[x].uid))
         
         await setDoc(doc(db,"games",gameName), {
-          players
+          players,
+          gameName,
         }).then(() => {
           console.log("Successful built game")}
         );
