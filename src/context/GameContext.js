@@ -17,7 +17,6 @@ export const GameContextProvider = ({ children }) => {
     if(!currentUser){
       return
     }
-    console.log(currentUser)
     const userRef = query(collection(db,"games"),where("players","array-contains",currentUser.uid)) 
     const unsub = onSnapshot(userRef,(snapshot)=>{
       setGameInfo(snapshot.docs.map(doc=>doc.data()))
