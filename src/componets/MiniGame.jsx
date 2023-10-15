@@ -2,9 +2,11 @@ import React, { useContext, useState,memo } from 'react';
 import { doc, updateDoc } from "firebase/firestore";
 import { auth, db, storage } from "../firebase";
 import { GameContext } from '../context/GameContext';
+import { UserContext } from '../context/UserContext';
 
 const MiniGame = (props)=>{
   const {gameInfo} = useContext(GameContext);
+  const {userInfo} = useContext(UserContext);
   const handlePlay = async(small)=>{
     if(gameInfo[0].function == "ready"){
       return 
@@ -25,24 +27,34 @@ const MiniGame = (props)=>{
     <div className='miniGame'>
       {props.gameNum.map((e,i)=>{
         let playable;
-        console.log(gameInfo[0].winnerM )
         if(gameInfo[0].winnerM != ""){
+          console.log("winner")
           playable = false;
         }else if(gameInfo[0].mainGame[gameInfo[0].recentS] == "FULL"|| gameInfo[0].mainGame[gameInfo[0].recentS] == "X" ||gameInfo[0].mainGame[gameInfo[0].recentS] == "O"){
+          console.log("completed game")
           if(gameInfo[0].mainGame[props.big] == "FULL"|| gameInfo[0].mainGame[props.big] == "X" ||gameInfo[0].mainGame[props.big] == "O"){
             playable = false;
           }else{
             playable = true;
           }
         }else if(gameInfo[0].recentS == props.big || gameInfo[0].recentS == 10 ){
+          console.log("last turn")
           playable = true;
         }else{
+          console.log("other")
           playable = false;
+        }
+        let myTurn
+
+        if(gameInfo[0].first == userInfo[0].uid && gameInfo[0].turn == "X"){
+          myTurn = true;
+        }else if(gameInfo[0].second == userInfo[0].uid && gameInfo[0].turn == "O"){
+          myTurn = true;
         }
         return(
           <div>
             {
-              gameInfo[0].function == "done" && e == "" && playable
+              gameInfo[0].function == "done" && e == "" && playable && myTurn
               ?
               <div className={"cellP"} onClick={()=>handlePlay(i)} key={i}>
               {e}
