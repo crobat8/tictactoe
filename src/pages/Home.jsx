@@ -70,6 +70,7 @@ const Home = () =>{
       </h1>
     )
   }
+  console.log(SearchInfo);
   return (
     <div className="home" >
       <header className='topBar'>

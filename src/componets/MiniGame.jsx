@@ -28,20 +28,16 @@ const MiniGame = (props)=>{
       {props.gameNum.map((e,i)=>{
         let playable;
         if(gameInfo[0].winnerM != ""){
-          console.log("winner")
           playable = false;
         }else if(gameInfo[0].mainGame[gameInfo[0].recentS] == "FULL"|| gameInfo[0].mainGame[gameInfo[0].recentS] == "X" ||gameInfo[0].mainGame[gameInfo[0].recentS] == "O"){
-          console.log("completed game")
           if(gameInfo[0].mainGame[props.big] == "FULL"|| gameInfo[0].mainGame[props.big] == "X" ||gameInfo[0].mainGame[props.big] == "O"){
             playable = false;
           }else{
             playable = true;
           }
         }else if(gameInfo[0].recentS == props.big || gameInfo[0].recentS == 10 ){
-          console.log("last turn")
           playable = true;
         }else{
-          console.log("other")
           playable = false;
         }
         let myTurn
@@ -52,7 +48,7 @@ const MiniGame = (props)=>{
           myTurn = true;
         }
         return(
-          <div>
+          <div className='cellHolder'>
             {
               gameInfo[0].function == "done" && e == "" && playable && myTurn
               ?

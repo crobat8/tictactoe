@@ -203,11 +203,11 @@ $neutral: #F1E5C3;
       color: white;
     }
     main{
-      display: grid;
-      grid-template-columns: 1fr 8fr 1fr;
       min-height: 800px;
       background-color: $usedGrey1;
       .gameHolder{
+        display: grid;
+        place-items: center;
         padding: 10px;
         .resetHolder{
           display: grid;
@@ -217,37 +217,51 @@ $neutral: #F1E5C3;
             height: 40px;
             border-radius: 10px;
             background-color: #197AFF;
+            padding: 10px;
           }
         }
         .fullGame{
+          justify-content: center;
           display: grid;
           grid-template-columns: 1fr 1fr 1fr;
+          max-width: fit-content;
           
           .miniGame{
             display: grid;
             grid-template-columns: 1fr 1fr 1fr;
             border-radius: 10px;
             margin: 10px;
+            padding: 10px;
+            max-width: fit-content;
+            max-height: fit-content;
             background: $usedGrey2;
-            .cellP{
+            .cellHolder{
               text-align: center;
-              border-radius: 10px;
-              padding: 10px;
-              margin: 10px;
-              height: 40px;
-              background: $usedGrey4;
+              .cellP{
+                text-align: center;
+                display: inline-block;
+                border-radius: 10px;
+                padding: 10px;
+                margin: 10px;
+                height: 40px;
+                width: 40px;
+                background: $usedGrey4;
+              }
+              .cellP:hover{
+                background: $usedGrey5;
+              }
+              .cellD{
+                text-align: center;
+                display: inline-block;
+                border-radius: 10px;
+                padding: 10px;
+                margin: 10px;
+                height: 40px;
+                width: 40px;
+                background: $usedGrey3;
+              }
             }
-            .cellP:hover{
-              background: $usedGrey5;
-            }
-            .cellD{
-              text-align: center;
-              border-radius: 10px;
-              padding: 10px;
-              margin: 10px;
-              height: 40px;
-              background: $usedGrey3;
-            }
+            
             
           }
         }
