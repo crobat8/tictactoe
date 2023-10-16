@@ -7,11 +7,13 @@ import { auth, db, storage } from "../firebase";
 
 import { collection, doc, query, setDoc, where, getDocs, deleteDoc} from "firebase/firestore";
 import { SearchingContext } from '../context/SearchingContext';
+import { GameContext } from '../context/GameContext';
 
 const Home = () =>{ 
   
   const{userInfo} =useContext(UserContext);
   const{SearchInfo} = useContext(SearchingContext)
+  const{gameInfo} = useContext(GameContext);
   const[mode,setMode]=useState("Online")
   const[foundGame,setFoundGame] = useState(null)
   const handleGameMode = async (e,x) =>{
@@ -41,6 +43,7 @@ const Home = () =>{
           x++
         }
         var players = [SearchInfo[x].uid,userInfo[0].uid]
+        var playersMMR = [SearchInfo[x].mmr,userInfo[0].mmr]
         var gameName;
         if(SearchInfo[x].uid<userInfo[0].uid){
           gameName = SearchInfo[x].uid+"_"+userInfo[0].uid;
@@ -50,8 +53,11 @@ const Home = () =>{
 
         await deleteDoc(doc(db,"searching",SearchInfo[x].uid))
         
+        await deleteDoc(doc(db,"games",gameName))
+
         await setDoc(doc(db,"games",gameName), {
           players,
+          playersMMR,
           gameName,
         }).then(() => {
           console.log("Successful built game")}
@@ -61,6 +67,20 @@ const Home = () =>{
       
     }
     
+  }
+
+  function Icon()  {
+    try {
+      return(
+        <div>
+          <h2>
+            you are {gameInfo[0].first == userInfo[0].uid?"X":"O"} this game
+          </h2>
+        </div>
+      )
+    } catch (error) {
+      console.log(error) 
+    }
   }
 
   if(!userInfo){
@@ -75,6 +95,7 @@ const Home = () =>{
     <div className="home" >
       <header className='topBar'>
         <div>
+          
           <p>
             name: {userInfo[0].displayName}
           </p>
@@ -90,6 +111,9 @@ const Home = () =>{
             Super TicTacToe 
           </h1>
         </div>
+          <div>
+            <Icon/>
+          </div>
         <div>
 
         </div>
