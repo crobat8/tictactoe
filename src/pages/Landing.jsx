@@ -12,21 +12,21 @@ import FadeIn from 'react-fade-in';
 const Landing = () =>{ 
   const [slide,setSlide] = useState(1)
   const pillInfo = [
-    {
-      title:"Practice",
-      description:"Check Daily practice plan",
-      pic:RedLogo
-    },
-    {
-      title:"Progress",
-      description:"Track progress for different preacice activities ",
-      pic:RedLogo
-    },
-    {
-      title:"Notes",
-      description:"Make notes to refer back to later",
-      pic:RedLogo
-    }
+    // {
+    //   title:"Practice",
+    //   description:"Check Daily practice plan",
+    //   pic:RedLogo
+    // },
+    // {
+    //   title:"Progress",
+    //   description:"Track progress for different preacice activities ",
+    //   pic:RedLogo
+    // },
+    // {
+    //   title:"Notes",
+    //   description:"Make notes to refer back to later",
+    //   pic:RedLogo
+    // }
   ]
   function HandleSwap(){
     

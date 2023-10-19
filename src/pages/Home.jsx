@@ -86,7 +86,7 @@ const Home = () =>{
   if(!userInfo){
     return(
       <h1>
-        Loading userInfo
+        Loading user Info
       </h1>
     )
   }
