@@ -21,6 +21,7 @@ const Home = () =>{
     setMode(x)
     if(x == 'Online'){
       console.log(SearchInfo.length)
+
       if(SearchInfo.length == 0){
         //no possible game
         console.log("null")
@@ -33,11 +34,8 @@ const Home = () =>{
         );
       }else if(SearchInfo.length == 1 && SearchInfo[0].uid == userInfo[0].uid){
         //im the only game found
-        console.log("just me")
       }else{
         //found a game
-        console.log("found")
-        console.log(SearchInfo)
         var x = 0;
         if(SearchInfo[x].uid == userInfo[0].uid){
           x++
@@ -53,10 +51,10 @@ const Home = () =>{
 
         await deleteDoc(doc(db,"searching",SearchInfo[x].uid))
         
-        await deleteDoc(doc(db,"games",gameName))
 
         await setDoc(doc(db,"games",gameName), {
           players,
+          activePlayers:players,
           playersMMR,
           gameName,
         }).then(() => {
@@ -79,7 +77,7 @@ const Home = () =>{
         </div>
       )
     } catch (error) {
-      console.log(error) 
+      // console.log(error) 
     }
   }
 
@@ -90,7 +88,6 @@ const Home = () =>{
       </h1>
     )
   }
-  console.log(SearchInfo);
   return (
     <div className="home" >
       <header className='topBar'>
