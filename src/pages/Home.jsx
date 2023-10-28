@@ -15,61 +15,17 @@ const Home = () =>{
   const{SearchInfo} = useContext(SearchingContext)
   const{gameInfo} = useContext(GameContext);
   const[mode,setMode]=useState("Online")
-  const[foundGame,setFoundGame] = useState(null)
   const handleGameMode = async (e,x) =>{
 
     setMode(x)
     if(x == 'Online'){
       console.log(SearchInfo.length)
-
       await setDoc(doc(db,"searching",userInfo[0].uid), {
         uid:userInfo[0].uid,
         mmr:userInfo[0].mmr
       }).then(() => {
         console.log("Successfully built search")}
       );
-
-      // if(SearchInfo.length == 0){
-      //   //no possible game
-      //   console.log("null")
-      //   console.log(SearchInfo)
-      //   await setDoc(doc(db,"searching",userInfo[0].uid), {
-      //     uid:userInfo[0].uid,
-      //     mmr:userInfo[0].mmr
-      //   }).then(() => {
-      //     console.log("Successfully built search")}
-      //   );
-      // }
-      // else if(SearchInfo.length == 1 && SearchInfo[0].uid == userInfo[0].uid){
-      //   //im the only game found
-      // }else{
-      //   //found a game
-      //   var x = 0;
-      //   if(SearchInfo[x].uid == userInfo[0].uid){
-      //     x++
-      //   }
-      //   var players = [SearchInfo[x].uid,userInfo[0].uid]
-      //   var playersMMR = [SearchInfo[x].mmr,userInfo[0].mmr]
-      //   var gameName;
-      //   if(SearchInfo[x].uid<userInfo[0].uid){
-      //     gameName = SearchInfo[x].uid+"_"+userInfo[0].uid;
-      //   }else{
-      //     gameName = userInfo[0].uid+"_"+SearchInfo[x].uid;
-      //   }
-
-      //   await deleteDoc(doc(db,"searching",SearchInfo[x].uid))
-        
-
-      //   await setDoc(doc(db,"games",gameName), {
-      //     players,
-      //     activePlayers:players,
-      //     playersMMR,
-      //     gameName,
-      //   }).then(() => {
-      //     console.log("Successful built game")}
-      //   );
-        
-      // }
       
     }
     
