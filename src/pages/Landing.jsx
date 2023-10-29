@@ -12,21 +12,27 @@ import FadeIn from 'react-fade-in';
 const Landing = () =>{ 
   const [slide,setSlide] = useState(1)
   const pillInfo = [
-    // {
-    //   title:"Practice",
-    //   description:"Check Daily practice plan",
-    //   pic:RedLogo
-    // },
-    // {
-    //   title:"Progress",
-    //   description:"Track progress for different preacice activities ",
-    //   pic:RedLogo
-    // },
-    // {
-    //   title:"Notes",
-    //   description:"Make notes to refer back to later",
-    //   pic:RedLogo
-    // }
+    {
+      title:"Online",
+      description:"play Tic Tac Toe online with random people in your skill range.",
+      pic:RedLogo
+    },
+    {
+      title:"how to win",
+      description:"to win you must get 3 in a row on the big board or the majority of the games won.",
+      pic:RedLogo
+    },
+    {
+      title:"how to play pt. 1",
+      description:"what area you play in within a small square determines where your opponet must play in the main game.",
+      pic:RedLogo
+    },
+    
+    {
+      title:"how to play pt. 2",
+      description:"once a game is won or full no one can play in it anymore, any forced plays in that area result in a free play anywhere",
+      pic:RedLogo
+    },
   ]
   function HandleSwap(){
     

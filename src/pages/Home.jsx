@@ -5,7 +5,7 @@ import FullGame from '../componets/FullGame';
 
 import { auth, db, storage } from "../firebase";
 
-import { collection, doc, query, setDoc, where, getDocs, deleteDoc} from "firebase/firestore";
+import { collection, doc, query, setDoc, where, getDocs, deleteDoc,updateDoc,arrayRemove} from "firebase/firestore";
 import { SearchingContext } from '../context/SearchingContext';
 import { GameContext } from '../context/GameContext';
 
@@ -19,16 +19,38 @@ const Home = () =>{
 
     setMode(x)
     if(x == 'Online'){
-      console.log(SearchInfo.length)
+      // assign winner
+      // remove self from game
+      // add self to searching
+      if(gameInfo.length == 0){
+        // not in a game
+      }else{
+        // in a game
+        // check to see if there is a winner
+        // if not set the winner of the current 
+        // to the other person
+        const activeRef = doc(db,"games",gameInfo[0].gameName)
+        if(gameInfo[0].winnerM == ""){
+
+          let otherPlayer = "X";
+          if(gameInfo[0].first == userInfo[0].uid){
+            otherPlayer = "O"
+          }
+
+          await updateDoc(activeRef, {
+            winnerM: otherPlayer,
+          });
+        }
+        //remove self from active players in the game
+        await updateDoc(activeRef, {
+          activePlayers: arrayRemove(userInfo[0].uid),
+        }); 
+      }
       await setDoc(doc(db,"searching",userInfo[0].uid), {
         uid:userInfo[0].uid,
         mmr:userInfo[0].mmr
-      }).then(() => {
-        console.log("Successfully built search")}
-      );
-      
+      });
     }
-    
   }
 
   function Icon()  {
@@ -72,11 +94,8 @@ const Home = () =>{
             Super TicTacToe 
           </h1>
         </div>
-          <div>
-            <Icon/>
-          </div>
         <div>
-
+          <Icon/>
         </div>
       </header>
       <main>
