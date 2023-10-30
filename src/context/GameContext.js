@@ -11,6 +11,7 @@ export const GameContext = createContext();
 export const GameContextProvider = ({ children }) => {
   const { currentUser } = useContext(AuthContext);
   const [gameInfo,setGameInfo]=useState(null)
+  const [gameID,setGameID] = useState(null)
   const [loading,setLoading]=useState(true)
   
   useEffect(() => {
@@ -20,7 +21,7 @@ export const GameContextProvider = ({ children }) => {
     const userRef = query(collection(db,"games"),where("activePlayers","array-contains",currentUser.uid)) 
     const unsub = onSnapshot(userRef,(snapshot)=>{
       setGameInfo(snapshot.docs.map(doc=>doc.data()))
-      
+      setGameID(snapshot.docs.map(doc=>doc.id))
     })
     return () => {
       unsub();
@@ -29,7 +30,7 @@ export const GameContextProvider = ({ children }) => {
   }, [currentUser]);
 
   return (
-    <GameContext.Provider value={{ gameInfo }}>
+    <GameContext.Provider value={{ gameInfo,gameID }}>
       {children}
     </GameContext.Provider>
   );

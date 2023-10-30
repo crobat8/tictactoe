@@ -20,7 +20,7 @@ export const SearchingContextProvider = ({ children }) => {
     if(!userInfo){
       return
     }
-    const userRef =query(collection(db,"searching"),where("mmr","<=",userInfo[0].mmr+100),where("mmr",">=",userInfo[0].mmr-100)) 
+    const userRef =query(collection(db,"searching"),where("uid","==",userInfo[0].uid)) 
     const unsub = onSnapshot(userRef,(snapshot)=>{
       setSearchInfo(snapshot.docs.map(doc=>doc.data()))
     })

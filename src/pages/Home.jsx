@@ -14,37 +14,41 @@ const Home = () =>{
   const{userInfo} =useContext(UserContext);
   const{SearchInfo} = useContext(SearchingContext)
   const{gameInfo} = useContext(GameContext);
+  const{gameID} = useContext(GameContext);
   const[mode,setMode]=useState("Online")
   const handleGameMode = async (e,x) =>{
 
     setMode(x)
     if(x == 'Online'){
-      // assign winner
       // remove self from game
+      // assign winner
       // add self to searching
       if(gameInfo.length == 0){
         // not in a game
       }else{
         // in a game
+        const activeRef = doc(db,"games",gameID[0])
+        //remove self from active players in the game
+        await updateDoc(activeRef, {
+          activePlayers: arrayRemove(userInfo[0].uid),
+        });         
         // check to see if there is a winner
-        // if not set the winner of the current 
+        // if not set the winner of the current game
         // to the other person
-        const activeRef = doc(db,"games",gameInfo[0].gameName)
         if(gameInfo[0].winnerM == ""){
 
           let otherPlayer = "X";
           if(gameInfo[0].first == userInfo[0].uid){
             otherPlayer = "O"
+
+          }else{
+
           }
 
           await updateDoc(activeRef, {
             winnerM: otherPlayer,
           });
         }
-        //remove self from active players in the game
-        await updateDoc(activeRef, {
-          activePlayers: arrayRemove(userInfo[0].uid),
-        }); 
       }
       await setDoc(doc(db,"searching",userInfo[0].uid), {
         uid:userInfo[0].uid,

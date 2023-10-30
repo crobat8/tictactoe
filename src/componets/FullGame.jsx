@@ -9,7 +9,7 @@ const FullGame = ()=>{
   const {gameInfo} = useContext(GameContext);
   const [turnPiece,setTurnPiece]=useState("X")
   const [lastPlayed,setLastPlayed]=useState(10)
-  if (gameInfo.length == 0||gameInfo[0].g0 == null){
+  if (gameInfo.length == 0){
     return(
       <h1>
         search for a game

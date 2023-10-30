@@ -6,12 +6,14 @@ import { UserContext } from '../context/UserContext';
 
 const MiniGame = (props)=>{
   const {gameInfo} = useContext(GameContext);
+  const{gameID} = useContext(GameContext);
   const {userInfo} = useContext(UserContext);
+
   const handlePlay = async(small)=>{
     if(gameInfo[0].function == "ready"){
       return 
     }
-    const gameRef = doc(db,"games",gameInfo[0].gameName)
+    const gameRef = doc(db,"games",gameID[0])
     let gameNum = "g" + props.big
     let miniGameInfo = gameInfo[0][gameNum]
     miniGameInfo[small] = gameInfo[0].turn
