@@ -227,14 +227,14 @@ $neutral: #F1E5C3;
           max-width: fit-content;
           
           .Xwinnerbackground{
-            background-color: blue;
+            background-color: $usedGrey1;
             height: 240px;
             width: 240px;
             border-radius: 10px;
             margin: 10px;
             padding: 10px;
             .Xwinner {
-              background: blue;
+              background: $usedGrey1;
               width: 220px;
               height: 220px;
               position: relative;
@@ -262,7 +262,7 @@ $neutral: #F1E5C3;
           }
 
           .Owinnerbackground{
-            background-color: red;
+            background-color: $usedGrey1;
             height: 260px;
             width: 260px;
             border-radius: 10px;
