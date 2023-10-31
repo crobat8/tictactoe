@@ -27,15 +27,20 @@ const MiniGame = (props)=>{
   console.log(props.result)
   if(props.winner == "X"){
     return(
-      <div className='Xwinner'>
-        X won here
+      <div className='Xwinnerbackground'>
+        <div className='Xwinner'>
+          
+        </div>
+        
       </div>
     )
   }
   if(props.winner == "O"){
     return(
-      <div className='Owinner'>
-        O won here
+      <div className='Owinnerbackground'>
+        <div className='Owinner'>
+
+        </div>
       </div>
     )
   }
