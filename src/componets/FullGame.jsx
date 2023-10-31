@@ -19,33 +19,15 @@ const FullGame = ()=>{
 
   return(
     <div className='fullGame'>
-      <MiniGame big={0}  
-                gameNum={gameInfo[0].g0}
-                />
-      <MiniGame big={1}  
-                gameNum={gameInfo[0].g1}
-                />
-      <MiniGame big={2}  
-                gameNum={gameInfo[0].g2}
-                />
-      <MiniGame big={3}  
-                gameNum={gameInfo[0].g3}
-                />
-      <MiniGame big={4}  
-                gameNum={gameInfo[0].g4}
-                />
-      <MiniGame big={5}  
-                gameNum={gameInfo[0].g5}
-                />
-      <MiniGame big={6}  
-                gameNum={gameInfo[0].g6}
-                />
-      <MiniGame big={7}  
-                gameNum={gameInfo[0].g7}
-                />
-      <MiniGame big={8}  
-                gameNum={gameInfo[0].g8}
-                />                   
+      {gameInfo[0].mainGame.map((e,key)=>{
+        const gameName = "g"+key;
+        return(
+          <MiniGame big={key}  
+                gameNum={gameInfo[0][gameName]}
+                winner = {gameInfo[0].mainGame[key]}
+          />
+        )
+      })}
     </div>
   )
 }

@@ -24,6 +24,21 @@ const MiniGame = (props)=>{
       function: "ready"
     });
   }
+  console.log(props.result)
+  if(props.winner == "X"){
+    return(
+      <div className='Xwinner'>
+        X won here
+      </div>
+    )
+  }
+  if(props.winner == "O"){
+    return(
+      <div className='Owinner'>
+        O won here
+      </div>
+    )
+  }
 
   return(
     <div className='miniGame'>

@@ -99,7 +99,7 @@ const Home = () =>{
           </h1>
         </div>
         <div>
-          <Icon/>
+          
         </div>
       </header>
       <main>
@@ -119,7 +119,7 @@ const Home = () =>{
               new online game
             </button>
             <div>
-
+              <Icon/>
             </div>
           </div>
           {/* {mode} */}
