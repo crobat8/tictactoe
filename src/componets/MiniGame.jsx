@@ -48,6 +48,10 @@ const MiniGame = (props)=>{
   return(
     <div className='miniGame'>
       {props.gameNum.map((e,i)=>{
+        console.log(e)
+        console.log(i)
+        console.log(props)
+        console.log(gameInfo[0])
         let playable;
         if(gameInfo[0].winnerM != ""){
           playable = false;
@@ -69,6 +73,7 @@ const MiniGame = (props)=>{
         }else if(gameInfo[0].second == userInfo[0].uid && gameInfo[0].turn == "O"){
           myTurn = true;
         }
+
         return(
           <div className='cellHolder'>
             {
@@ -78,7 +83,7 @@ const MiniGame = (props)=>{
               {e}
               </div>
               :
-              <div className={"cellD"} key={i}>
+              <div className={"cellD"} key={i} style={props.big==gameInfo[0].recentM&&i==gameInfo[0].recentS?{height:"30px",width:"30px",border: "thick solid #FFFFFF"}:{color: "white"}}>
               {e}
               </div>
             }

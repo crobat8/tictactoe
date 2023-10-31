@@ -12,7 +12,7 @@ const FullGame = ()=>{
   if (gameInfo.length == 0){
     return(
       <h1>
-        search for a game
+        searching for a game
       </h1>
     )
   }

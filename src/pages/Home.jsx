@@ -106,12 +106,6 @@ const Home = () =>{
         <div className='placeHolder'></div>
         <div className='gameHolder'>
           <div className='resetHolder'>
-            {/* <button onClick={(e)=>handleGameMode(e,"One")}>
-              new one player game
-            </button> */}
-            {/* <button onClick={(e)=>handleGameMode(e,"two")}> 
-              new two player game
-            </button> */}
             <div>
 
             </div>

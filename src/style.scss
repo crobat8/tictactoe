@@ -3,8 +3,8 @@ $usedBlue1:#478FFB;
 $usedGrey1:#2B2B2B;
 $usedGrey2:#3B3B3B;
 $usedGrey3:#4B4B4B;
-$usedGrey4:#5B5B5B;
-$usedGrey5:#6B6B6B;
+$usedGrey4:#6B6B6B;
+$usedGrey5:#7B7B7B;
 
 $crimson: #A30f32;
 $crimson2: #8B0025;
@@ -300,6 +300,7 @@ $neutral: #F1E5C3;
                 height: 40px;
                 width: 40px;
                 background: $usedGrey4;
+                
               }
               .cellP:hover{
                 background: $usedGrey5;
@@ -313,6 +314,7 @@ $neutral: #F1E5C3;
                 height: 40px;
                 width: 40px;
                 background: $usedGrey3;
+                color: white;
               }
             }
             
